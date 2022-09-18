@@ -1,0 +1,14 @@
+﻿@model List<show_question>
+@if (Model.Count > 0)
+{
+	@foreach (var item in Model)
+	{
+		<h2 style="color:red">QUESTION :<a href="/answer/index/@item.question_id">@item.question</a> </h2>
+		<hr></hr>
+	}
+}
+else
+{
+	<h1>nooooooooooooooooooooooooooooooooooooooooooooooo</h1>
+}
+ffffffffffffffffffffffffffffffffff

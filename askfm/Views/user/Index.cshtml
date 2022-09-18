@@ -1,0 +1,51 @@
+﻿@model profile
+<h1 style="color:red"> ABOUT :</h1>
+<img href="@Model.user.photo"></img>
+<h3>NAME: @Model.user.name</h3>
+<h3>EMAIL: @Model.user.email</h3>
+<h3>LINKED IN : <a href="@Model.user.linkedin_link">@Model.user.linkedin_link</a></h3>
+<h3>FACEBOOLK : <a href="@Model.user.facebook_link">@Model.user.facebook_link</a></h3>
+<h3>TWEETER : <a href="@Model.user.tweeter_link">@Model.user.tweeter_link</a></h3>
+<h3>CV : <a href="@Model.user.cv_link">@Model.user.cv_link</a></h3>
+<br></br>
+<hr></hr>
+
+
+<h1 style="color:red"> ASK  :</h1>
+<form asp-controller="question" asp-action="Index">
+	<div class="form-group">
+                <label asp-for="@Model.ask_Qes.descritption" class="control-label">ASK</label>
+                <input asp-for="@Model.ask_Qes.descritption" class="form-control" placeholder="ASK QUESTION" />
+                <span asp-validation-for="@Model.ask_Qes.descritption" class="text-danger"></span>
+     </div>
+     <input type="hidden" asp-for="@Model.user.id"></input>
+      <label asp-for="@Model.ask_Qes.unknown">DO YOU WANT ANONYMOUS IDENTITY </label>
+               <select asp-for="@Model.ask_Qes.unknown" class="form-select" aria-label="Default select example">
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                </select>
+           
+       <div class="form-group">
+                <input type="submit" value="ASK" class="btn btn-primary" />
+       </div>
+</form>
+<br></br>
+<hr></hr>
+@if(Model.all_question.Count>0)
+{
+    
+   
+    foreach(var item in Model.all_question){
+        <h2 style="color:blue">Question: @item.description_ask</h2>
+        <h2>Answer: @item.description_answer</h2>
+        <h4><a href="/@item.id">go to</a></h4>
+        <hr></hr>
+    }
+}
+else{
+    <h2>NO QUESTIONS </h2>
+}
+
+
+fffffffffffffffffffffffffffffffffffffffffff
+pppppppppp
