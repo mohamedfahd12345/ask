@@ -1,4 +1,5 @@
 ﻿@model profile
+@*//-----------------------INFORMATION ABOUT PROFILE-------------------------------------\\*@
 <h1 style="color:red"> ABOUT :</h1>
 <img href="@Model.user.photo"></img>
 <h3>NAME: @Model.user.name</h3>
@@ -8,9 +9,22 @@
 <h3>TWEETER : <a href="@Model.user.tweeter_link">@Model.user.tweeter_link</a></h3>
 <h3>CV : <a href="@Model.user.cv_link">@Model.user.cv_link</a></h3>
 <br></br>
+@*//-----------------------FOLLOW BUTTON-------------------------------------\\*@
+<form asp-controller="follow" asp-action="Index">
+     <div class="form-group">
+          <input type="hidden" asp-for="@Model.user.id" />
+        @if (Model.is_follow == false)
+        {
+            <input type="submit" value="Follow" class="btn btn-primary" />
+        }
+        else
+        {
+            <input type="submit" value="Following" class="btn btn-primary" />
+        }
+    </div>
+</form>
 <hr></hr>
-
-
+@*//-----------------------ASK FORM -------------------------------------\\*@
 <h1 style="color:red"> ASK  :</h1>
 <form asp-controller="question" asp-action="Index">
 	<div class="form-group">
@@ -31,6 +45,7 @@
 </form>
 <br></br>
 <hr></hr>
+@*//-----------------------SHOW QUESTIONS ABOUT PRFILE -------------------------------------\\*@
 @if(Model.all_question.Count>0)
 {
     
@@ -38,7 +53,7 @@
     foreach(var item in Model.all_question){
         <h2 style="color:blue">Question: @item.description_ask</h2>
         <h2>Answer: @item.description_answer</h2>
-        <h4><a href="/@item.id">go to</a></h4>
+        <h4><a href="/subquestions/Index/@item.id">go to</a></h4>
         <hr></hr>
     }
 }
@@ -46,6 +61,4 @@ else{
     <h2>NO QUESTIONS </h2>
 }
 
-
-fffffffffffffffffffffffffffffffffffffffffff
-pppppppppp
+@*//-----------------------TEST-------------------------------------\\*@

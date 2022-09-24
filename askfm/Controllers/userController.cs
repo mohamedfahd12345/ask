@@ -14,6 +14,7 @@ namespace askfm.Controllers
         private readonly askfmContext db = new askfmContext();
         public IActionResult Index(string id)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var profile=new profile();
             //--------------------------ALL INFORMATION ABOUT THIS USER-----------------------------------\\
             var target_user = db.AspNetUsers.Where(x => x.Id == id).Select(x =>
@@ -36,6 +37,7 @@ namespace askfm.Controllers
                                     join a in db.Answers on q.Id equals a.QestionId
 
                                     where q.ToUserId==id&&q.Reply==true &&a.Main==true
+                                   
                                     select new temp_ques
                                     {
                                        id=q.Id,
@@ -43,13 +45,18 @@ namespace askfm.Controllers
                                        description_ask=q.Description
 
                                     }).ToList();
+            all_question.Reverse();
             foreach (var item in all_question)
             {
                 profile.all_question.Add(item);
                
             }
-
-			
+            //-------------------is follow-----------------------------\\
+            var is_following = db.Followers.Where(x => x.FatherId == id && x.ChildId == userId).FirstOrDefault();
+            if (is_following == null)
+                profile.is_follow = false;
+			else
+                profile.is_follow = true;
             //-----------------------------ASK QUSETION ----------------------------------------------------\\
 
             return View(profile);

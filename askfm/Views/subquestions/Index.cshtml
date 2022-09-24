@@ -1,0 +1,28 @@
+﻿@model sub_question 
+@*//------------------------QUESTION-----------------------------------\\*@
+<h1 style="color:red">QUESTION:@Model.question_description</h1>
+<h1 style="color:blue">ANSWER:@Model.main_answer</h1>
+<br/>
+<hr></hr>
+@*//------------------------SUB ANSWERS-----------------------------------\\*@
+@if (Model.answers.Count > 0)
+{
+    @foreach (var item in Model.answers)
+{
+    <h3>SUB ANSWER :@item</h3>
+    <br/>
+<hr></hr>
+}
+}
+@*//------------------------ASK FORM-----------------------------------\\*@
+<form asp-controller="subquestions" asp-action="create">
+     <div class="form-group">
+          <input type="hidden" asp-for="@Model.question_id" />
+          <div class="form-group">
+                <label asp-for="@Model.ask_descripion" class="control-label">ASK</label>
+                <input asp-for="@Model.ask_descripion" class="form-control" placeholder="ASK QUESTION" />
+                <span asp-validation-for="@Model.ask_descripion" class="text-danger"></span>
+     </div>
+            <input type="submit" value="ASK" class="btn btn-primary" />
+    </div>
+</form>

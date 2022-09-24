@@ -16,9 +16,9 @@ namespace askfm.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var target_followers = (from u in db.AspNetUsers
-                              join f in db.Followers on u.Id equals f.ChildId
+                              join f in db.Followers on u.Id equals f.FatherId
                          
-                              where u.Id == userId
+                              where f.ChildId==userId
                               select new user
                               {
                                  name= u.UserName,
